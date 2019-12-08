@@ -6,11 +6,13 @@ public class PickUp : MonoBehaviour {
     [SerializeField] float rotationSpeed = 30f;
 
     private void Update() {
-        transform.Rotate(rotationSpeed * Time.deltaTime,
+        if (gameObject.tag=="PickUp3d") {
+            transform.Rotate(rotationSpeed * Time.deltaTime,
             rotationSpeed * Time.deltaTime,
             rotationSpeed * Time.deltaTime);
+        }        
     }
-
+    
     private void OnTriggerEnter(Collider other) {
         switch (gameObject.tag) {
             case "PickUpJump":
@@ -36,7 +38,7 @@ public class PickUp : MonoBehaviour {
 
     private void PickUpFollow() {
         GameObject mainCamera = GameObject.FindWithTag("MainCamera");
-        mainCamera.GetComponent<Camera>().StartFollowing();
+        mainCamera.GetComponent<MainCamera>().StartFollowing();
     }
 
     private void PickUpGravity() {
@@ -46,5 +48,6 @@ public class PickUp : MonoBehaviour {
 
     private void PickUp3d() {
         GameController.is3d = true;
+        Camera.main.orthographic = false;
     }
 }

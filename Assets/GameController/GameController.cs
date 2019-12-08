@@ -29,11 +29,15 @@ public class GameController : MonoBehaviour {
     private static void resetParameters() {
         canJump = false;
         isCameraFollowing = false;
-        is3d = false;
 
         if (isGravityInverted) {
             isGravityInverted = false;
             Physics.gravity *= -1;
+        }
+
+        if (is3d) {
+            is3d = false;
+            Camera.main.orthographic = true;
         }
     }
 

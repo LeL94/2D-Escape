@@ -25,8 +25,13 @@ public class Player : MonoBehaviour {
     }
 
     private void Move() {
-        float controlThrow = Input.GetAxis("Horizontal"); // value is between -1 to +1
-        rb.velocity = new Vector2(controlThrow * moveSpeed, rb.velocity.y);
+        float controlThrowHorizontal = Input.GetAxis("Horizontal"); // value is between -1 to +1
+        rb.velocity = new Vector3(controlThrowHorizontal * moveSpeed, rb.velocity.y, rb.velocity.z);
+
+        if (GameController.is3d) {
+            float controlThrowVertical = Input.GetAxis("Vertical"); // value is between -1 to +1
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, controlThrowVertical * moveSpeed);
+        }
     }
 
     private void Jump() {
