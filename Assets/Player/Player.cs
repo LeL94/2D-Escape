@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     [SerializeField] float moveSpeed = 10f;
-    [SerializeField] float jumpForce = 30f;
+    [SerializeField] float jumpForce = 800f;
 
     Rigidbody rb;
     SphereCollider collider;
@@ -25,13 +25,19 @@ public class Player : MonoBehaviour {
     }
 
     private void Move() {
-        float controlThrowHorizontal = Input.GetAxis("Horizontal"); // value is between -1 to +1
-        rb.velocity = new Vector3(controlThrowHorizontal * moveSpeed, rb.velocity.y, rb.velocity.z);
+        float h = Input.GetAxis("Horizontal"); // value is between -1 to +1
+        float v = Input.GetAxis("Vertical");
 
         if (GameController.is3d) {
-            float controlThrowVertical = Input.GetAxis("Vertical"); // value is between -1 to +1
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, controlThrowVertical * moveSpeed);
+            Vector3 m_CamForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+            Vector3 m_Move = v * m_CamForward + h * Camera.main.transform.right;
+
+            rb.velocity = Vector3.Normalize(m_Move ) * moveSpeed + new Vector3(0f, rb.velocity.y, 0f);
         }
+        else {
+            rb.velocity = new Vector3(h * moveSpeed, rb.velocity.y, 0f);
+        }
+
     }
 
     private void Jump() {
@@ -40,10 +46,7 @@ public class Player : MonoBehaviour {
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded) {
-            Vector3 jumpForceVector = -Physics.gravity * jumpForce;
-
-            if (GameController.isGravityInverted)
-                jumpForceVector *= -1;
+            Vector3 jumpForceVector = -Physics.gravity - jumpForce * Vector3.Normalize(Physics.gravity);
 
             rb.AddForce(jumpForceVector);
         }
