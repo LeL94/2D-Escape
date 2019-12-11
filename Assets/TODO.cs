@@ -8,4 +8,12 @@
  * 
  * Pick up to rotate camera
  * 
+ * Animation jump, spawn, die
+ * 
+ * Nuove abilità si sbloccano (tipo ruotare camera) e si può tornare nei livelli precedenti per scoprire nuove aree
+ * 
+ * Il pickup rotate camera ruota, no pickup3d
+ * 
+ * Constraint vertical camera rotation
+ * 
  */
