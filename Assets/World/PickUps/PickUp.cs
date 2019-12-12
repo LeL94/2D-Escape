@@ -44,6 +44,8 @@ public class PickUp : MonoBehaviour {
     private void PickUpGravity() {
         GameController.isGravityInverted = !GameController.isGravityInverted;
         Physics.gravity *= -1;
+        //GameObject player = GameObject.FindWithTag("Player");
+        //player.transform.Rotate(180f, 0f, 0f);
     }
 
     private void PickUp3d() {

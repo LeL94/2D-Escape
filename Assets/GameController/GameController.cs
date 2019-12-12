@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour {
 
     public static int currentSceneIndex;
 
-    [SerializeField] float gravity = 50f;
 
     private void Awake() {
         // Singleton pattern
@@ -21,7 +20,6 @@ public class GameController : MonoBehaviour {
         }
         else {
             DontDestroyOnLoad(gameObject);
-            Physics.gravity = new Vector3(0f, -gravity, 0f);
             currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         }        
     }
