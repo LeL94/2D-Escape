@@ -14,6 +14,5 @@
  * 
  * Il pickup rotate camera ruota, no pickup3d
  * 
- * Constraint vertical camera rotation
- * 
+ * Attivare a disattivare a piacimento le skills
  */

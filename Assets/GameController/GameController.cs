@@ -13,6 +13,13 @@ public class GameController : MonoBehaviour {
 
 
     private void Awake() {
+        // disable bound rendering
+        /*GameObject[] bounds = GameObject.FindGameObjectsWithTag("EditorOnly");
+        foreach (GameObject bound in bounds) {
+            MeshRenderer mesh = bound.GetComponent<MeshRenderer>();
+            mesh.enabled = false;
+        }*/
+
         // Singleton pattern
         int numGameController = FindObjectsOfType<GameController>().Length;
         if (numGameController > 1) {
@@ -21,7 +28,7 @@ public class GameController : MonoBehaviour {
         else {
             DontDestroyOnLoad(gameObject);
             currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        }        
+        }
     }
 
     private void Update() {
