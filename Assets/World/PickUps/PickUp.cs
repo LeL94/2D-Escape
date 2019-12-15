@@ -2,18 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour {
-    [SerializeField] float rotationSpeed = 30f;
-
-
-    private void Update() {
-        if (gameObject.tag=="PickUp3d") {
-            transform.Rotate(rotationSpeed * Time.deltaTime,
-            rotationSpeed * Time.deltaTime,
-            rotationSpeed * Time.deltaTime);
-        }        
-    }
-    
+public class PickUp : Collectable {
+        
     private void OnTriggerEnter(Collider other) {
         switch (gameObject.tag) {
             case "PickUpJump":

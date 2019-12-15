@@ -15,4 +15,6 @@
  * Il pickup rotate camera ruota, no pickup3d
  * 
  * Attivare a disattivare a piacimento le skills
+ * 
+ * Implement checkpoints
  */
