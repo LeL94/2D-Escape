@@ -6,6 +6,6 @@ using UnityEngine.UI;
 public class TextLevel : MonoBehaviour {
 
     private void Start() {
-        GetComponent<Text>().text = GameController.currentSceneIndex.ToString();
+        GetComponent<Text>().text = GameController.getCurrentLevel().ToString();
     }
 }

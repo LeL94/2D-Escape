@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickUp : MonoBehaviour {
     [SerializeField] float rotationSpeed = 30f;
 
+
     private void Update() {
         if (gameObject.tag=="PickUp3d") {
             transform.Rotate(rotationSpeed * Time.deltaTime,
@@ -18,9 +19,9 @@ public class PickUp : MonoBehaviour {
             case "PickUpJump":
                 PickUpJump();
                 break;
-            case "PickUpFollow":
+            /*case "PickUpFollow":
                 PickUpFollow();
-                break;
+                break;*/
             case "PickUpGravity":
                 PickUpGravity();
                 break;
@@ -33,23 +34,19 @@ public class PickUp : MonoBehaviour {
     }
 
     private void PickUpJump() {
-        GameController.canJump = true;
+        GameController.enableJump(true);
     }
 
-    private void PickUpFollow() {
+    /*private void PickUpFollow() {
         GameObject mainCamera = GameObject.FindWithTag("MainCamera");
         mainCamera.GetComponent<MainCamera>().StartFollowing();
-    }
+    }*/
 
     private void PickUpGravity() {
-        GameController.isGravityInverted = !GameController.isGravityInverted;
-        Physics.gravity *= -1;
-        //GameObject player = GameObject.FindWithTag("Player");
-        //player.transform.Rotate(180f, 0f, 0f);
+        GameController.invertGravity();
     }
 
     private void PickUp3d() {
-        GameController.is3d = true;
-        Camera.main.orthographic = false;
+        GameController.enable3d();
     }
 }

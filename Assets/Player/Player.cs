@@ -8,9 +8,9 @@ public class Player : MonoBehaviour {
     [SerializeField] float jumpForce = 15f;
     [SerializeField] float gravityForce = 3f;
 
-    Rigidbody rb;
-    SphereCollider myCollider;
-    float distToGround;
+    private Rigidbody rb;
+    private SphereCollider myCollider;
+    private float distToGround;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
         float h = Input.GetAxisRaw("Horizontal"); // value is either -1 or +1
         float v = Input.GetAxisRaw("Vertical");
 
-        if (GameController.is3d) {
+        if (GameController.getIs3dEnabled()) {
             Vector3 m_CamForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
             Vector3 m_Move = v * m_CamForward + h * Camera.main.transform.right;
 
@@ -48,9 +48,9 @@ public class Player : MonoBehaviour {
 
     private void Jump() {       
 
-        if (GameController.canJump && Input.GetButtonDown("Jump")) {
+        if (GameController.getIsJumpEnabled() && Input.GetButtonDown("Jump")) {
 
-            if (GameController.isGravityInverted) {
+            if (GameController.getIsGravityInverted()) {
                 if (!isGrounded("above"))
                     return;
                 rb.velocity = new Vector3(rb.velocity.x, -jumpForce, rb.velocity.z);

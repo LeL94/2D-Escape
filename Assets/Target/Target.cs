@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Target : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collision) {
-        GameController.loadNextLevel();
+        GameController.loadRelativeLevel(1);
     }
 
 

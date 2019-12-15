@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,11 @@ public class MainCamera : MonoBehaviour {
 
     private GameObject target;
     private Vector3 offset;
+    GameController gc;
+
+    private void Start() {
+        GameController gc = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+    }
 
     public void StartFollowing() {
         target = GameObject.FindWithTag("Player");
@@ -31,15 +36,16 @@ public class MainCamera : MonoBehaviour {
                 offset;
             transform.position = target.transform.position + offset;
 
-            /*// constrain vertical position to limit x angle:
+            // constrain vertical position to limit x angle:
             float dh = transform.position.y - target.transform.position.y;
             
             if (dh < 0)
                 transform.position = new Vector3(transform.position.x,
                     target.transform.position.y,
-                    transform.position.z);*/
+                    transform.position.z);
             
             transform.LookAt(target.transform.position);
         }
     }
 }
+*/

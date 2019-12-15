@@ -5,6 +5,6 @@ using UnityEngine;
 public class Bound : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
-        GameController.resetScene();
+        GameController.loadRelativeLevel(0); // reset level
     }
 }
