@@ -68,7 +68,7 @@ namespace UnityStandardAssets.Cameras
 
         private void HandleRotationMovement()
         {
-			if(Time.timeScale < float.Epsilon || !GameController.getIs3dEnabled())
+			if(Time.timeScale < float.Epsilon || !GameManager.getIs3dEnabled())
 			return;
 
             // Read the user input

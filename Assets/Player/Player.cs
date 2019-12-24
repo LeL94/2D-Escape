@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
         float h = Input.GetAxisRaw("Horizontal"); // value is either -1 or +1
         float v = Input.GetAxisRaw("Vertical");
 
-        if (GameController.getIs3dEnabled()) {
+        if (GameManager.getIs3dEnabled()) {
             Vector3 m_CamForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
             Vector3 m_Move = v * m_CamForward + h * Camera.main.transform.right;
 
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
     }
 
     private void Jump() {
-        if (!GameController.getIsJumpEnabled())
+        if (!GameManager.getIsJumpEnabled())
             return;
 
 
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour {
             jumpPressedRemember = jumpPressedRememberTime;
 
         // gravity normal
-        if (!GameController.getIsGravityInverted()) {
+        if (!GameManager.getIsGravityInverted()) {
             if (isGrounded("below"))
                 groundedRembember = groundedRembemberTime;
 

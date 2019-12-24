@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class GameManager : MonoBehaviour {
     private static bool canJump = false;
     private static bool isCameraFollowing = false;
     private static bool isGravityInverted = false;
@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour {
         }*/
 
         // Singleton pattern
-        int numGameController = FindObjectsOfType<GameController>().Length;
+        int numGameController = FindObjectsOfType<GameManager>().Length;
         if (numGameController > 1) {
             Destroy(gameObject);
         }
@@ -31,9 +31,11 @@ public class GameController : MonoBehaviour {
         }
     }
 
+
     private void Update() {
-        if (Input.GetKey("escape"))
-            Application.Quit();
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            PauseUnpause();
+        }
     }
 
     private static void resetParameters() {
@@ -93,5 +95,31 @@ public class GameController : MonoBehaviour {
     
     public static int getCurrentLevel() {
         return currentSceneIndex;
+    }
+
+    //
+    public static void PauseUnpause() {
+        if (UIManager.instance.pauseScreen.activeInHierarchy) {
+            UIManager.instance.pauseScreen.SetActive(false); // close pause menu
+            Time.timeScale = 1; // normal time
+            EnableCursor(false); // hide and lock cursor
+        }
+        else {
+            UIManager.instance.pauseScreen.SetActive(true); // open pause menu
+            Time.timeScale = 0f; // freeze time
+            EnableCursor(true); // free cursor
+            UIManager.instance.CloseOptions(); // close option screen in case it is open
+        }
+    }
+
+    private static void EnableCursor(bool cursorEnabled) {
+        if (cursorEnabled) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }
