@@ -24,7 +24,7 @@ public class PickUp : Collectable {
     }
 
     private void PickUpJump() {
-        GameManager.instance.enableJump(true);
+        GameManager.instance.EnableJump(true);
     }
 
     /*private void PickUpFollow() {
@@ -33,10 +33,10 @@ public class PickUp : Collectable {
     }*/
 
     private void PickUpGravity() {
-        GameManager.instance.invertGravity();
+        GameManager.instance.InvertGravity();
     }
 
     private void PickUp3d() {
-        GameManager.instance.enable3d();
+        GameManager.instance.Enable3d();
     }
 }

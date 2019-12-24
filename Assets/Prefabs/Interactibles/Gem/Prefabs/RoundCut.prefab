@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0738ad58d6b2564ca3a1deb790fa80d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed_x: 0
-  rotationSpeed_y: -30
-  rotationSpeed_z: 0
+  rotationSpeed_x: 30
+  rotationSpeed_y: 30
+  rotationSpeed_z: 30
 --- !u!1 &105844
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 2356856}
   - component: {fileID: 6444800}
   - component: {fileID: 1526059996}
+  - component: {fileID: 4200955639247600379}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -151,6 +152,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60b2d6bbdc298b8428e899bc09de4b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4200955639247600379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7844abd64ccc3734f93df718b3dc3dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1515504009

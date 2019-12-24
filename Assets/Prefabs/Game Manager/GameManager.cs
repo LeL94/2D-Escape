@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField] string levelToLoad = "LevelSelect";
     [SerializeField] float timeToEndLevel = 0f;
 
-    private bool canJump = false;
-    private bool isCameraFollowing = false;
-    private bool isGravityInverted = false;
-    private bool is3d = false;
+    public bool canJump = false;
+    //private bool isCameraFollowing = false;
+    public bool isGravityInverted = false;
+    public bool is3d = false;
 
     private int currentSceneIndex;
 
@@ -21,7 +21,10 @@ public class GameManager : MonoBehaviour {
     private void Awake() {
         instance = this;
         EnableCursor(false);
-        Debug.Log("cursor disabled");
+
+        // initialize skills
+        if (PlayerPrefs.GetInt("3d_unlocked") == 1)
+            Enable3d();
     }
 
     private void Update() {
@@ -32,7 +35,7 @@ public class GameManager : MonoBehaviour {
 
     private void ResetParameters() {
         canJump = false;
-        isCameraFollowing = false;
+        //isCameraFollowing = false;
 
         if (isGravityInverted) {
             isGravityInverted = false;
@@ -45,7 +48,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void loadRelativeLevel(int level) {
+    public void LoadRelativeLevel(int level) {
         ResetParameters();
         // level = -1 : previous level
         // level = 0: current level
@@ -56,38 +59,20 @@ public class GameManager : MonoBehaviour {
     }
 
     // pick ups
-    public void enableJump(bool setCanJump) {
+    public void EnableJump(bool setCanJump) {
         canJump = setCanJump;
     }
 
-    public void enable3d() {
+    public void Enable3d() {
         is3d = true;
         Camera.main.orthographic = false;
     }
 
-    public void invertGravity() {
+    public void InvertGravity() {
         isGravityInverted = !isGravityInverted;
         Physics.gravity *= -1;
         //GameObject player = GameObject.FindWithTag("Player");
         //player.transform.Rotate(180f, 0f, 0f);
-    }
-
-
-    // getters
-    public bool getIsJumpEnabled() {
-        return canJump;
-    }
-
-    public bool getIsGravityInverted() {
-        return isGravityInverted;
-    }
-
-    public bool getIs3dEnabled() {
-        return is3d;
-    }
-    
-    public int getCurrentLevel() {
-        return currentSceneIndex;
     }
 
     //

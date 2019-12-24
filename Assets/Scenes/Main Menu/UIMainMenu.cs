@@ -20,10 +20,7 @@ public class UIMainMenu : MonoBehaviour
     }
 
     public void NewGame() {
-        PlayerPrefs.DeleteAll(); // reset all player prefs
-        PlayerPrefs.SetString("CurrentLevel", firstLevel); // set first level as current level
-        PlayerPrefs.SetInt(firstLevel, 1); // set first level as unlocked
-        // PlayerPrefs.SetInt("Continue", 0); TODO activate when player saves
+        InitializePlayerPrefs();        
         SceneManager.LoadScene(firstLevel);
     }
 
@@ -33,5 +30,19 @@ public class UIMainMenu : MonoBehaviour
 
     public void Quit () {
         Application.Quit();
+    }
+
+    public void InitializePlayerPrefs() {
+        PlayerPrefs.DeleteAll(); // reset all player prefs
+        PlayerPrefs.SetString("CurrentLevel", firstLevel); // set first level as current level
+        PlayerPrefs.SetInt(firstLevel, 1); // set first level as unlocked
+
+        // skills
+        PlayerPrefs.SetInt("jump_unlocked", 0);
+        PlayerPrefs.SetInt("double_jump_unlocked", 0);
+        PlayerPrefs.SetInt("3d_unlocked", 0);
+
+
+        // PlayerPrefs.SetInt("Continue", 0); TODO activate when player saves
     }
 }

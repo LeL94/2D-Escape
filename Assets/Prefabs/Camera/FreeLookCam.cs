@@ -68,8 +68,8 @@ namespace UnityStandardAssets.Cameras
 
         private void HandleRotationMovement()
         {
-			if(Time.timeScale < float.Epsilon || !GameManager.instance.getIs3dEnabled())
-			return;
+			if(Time.timeScale < float.Epsilon || !GameManager.instance.is3d)
+                return;
 
             // Read the user input
             var x = Input.GetAxis("Mouse X");

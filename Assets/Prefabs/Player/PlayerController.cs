@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
         float h = Input.GetAxisRaw("Horizontal"); // value is either -1 or +1
         float v = Input.GetAxisRaw("Vertical");
 
-        if (GameManager.instance.getIs3dEnabled()) {
+        if (GameManager.instance.is3d) {
             Vector3 m_CamForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
             Vector3 m_Move = v * m_CamForward + h * Camera.main.transform.right;
 
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Jump() {
-        if (!GameManager.instance.getIsJumpEnabled())
+        if (!GameManager.instance.canJump)
             return;
 
 
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour {
             jumpPressedRemember = jumpPressedRememberTime;
 
         // gravity normal
-        if (!GameManager.instance.getIsGravityInverted()) {
+        if (!GameManager.instance.isGravityInverted) {
             if (isGrounded("below"))
                 groundedRembember = groundedRembemberTime;
 
@@ -113,64 +113,5 @@ public class PlayerController : MonoBehaviour {
         return false;
     }
 }
-
-/* Character controller
-public class Player : MonoBehaviour {
-    [SerializeField] float moveSpeed = 10f;
-    [SerializeField] float jumpForce = 150f;
-    [SerializeField] float gravityScale = 3f;
-
-    CharacterController controller;
-    Rigidbody rb;
-
-    private Vector3 moveDirection;
-
-
-    private void Start() {
-        controller = GetComponent<CharacterController>();
-        rb = GetComponent<Rigidbody>();
-    }
-
-    private void Update() {
-        float h = Input.GetAxisRaw("Horizontal"); // value is either -1 or +1
-        float v = Input.GetAxisRaw("Vertical");
-
-        if (GameController.is3d) {
-            moveDirection = Vector3.Normalize(new Vector3(h, 0f, v)) * moveSpeed;
-        }
-        else {
-            moveDirection = new Vector3(h, 0f, 0f) * moveSpeed;
-        }
-
-
-        if (GameController.canJump && Input.GetButtonDown("Jump")) {
-
-            if (GameController.isGravityInverted) {
-                // check if grounded
-                if ((controller.collisionFlags & CollisionFlags.Above) != 0) {
-                    moveDirection.y = -jumpForce;
-                }
-            }
-            else {
-                // check if grounded
-                if ((controller.collisionFlags & CollisionFlags.Below) != 0) {
-                    moveDirection.y = jumpForce;
-                }
-            }                               
-        }
-
-
-        // apply gravity
-        moveDirection.y += Physics.gravity.y * gravityScale;
-
-
-        // move
-        controller.Move(moveDirection * Time.deltaTime);
-        
-    }
-
-
-}
-*/
 
 
