@@ -6,6 +6,6 @@ public class Bound : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player"))
-            GameManager.instance.Respawn(); // reset level
+            GameManager.instance.Respawn(); // respawn player
     }
 }

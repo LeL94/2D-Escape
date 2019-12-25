@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] string levelToLoad = "LevelSelect";
 
     // Camera
-    public GameObject camRig;
-    public GameObject camPivot;
+    private GameObject camRig, camPivot;
+
 
     public bool canJump = false;
     //private bool isCameraFollowing = false;
@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour {
         // initialize skills
         //if (PlayerPrefs.GetInt("3d_unlocked") == 1)
         //    Enable3d();
+    }
+
+    private void Start() {
+        camRig = FindObjectOfType<FreeLookCam>().gameObject;
+        camPivot = camRig.transform.GetChild(0).gameObject;
     }
 
     private void Update() {
@@ -93,8 +98,6 @@ public class GameManager : MonoBehaviour {
     public void InvertGravity() {
         isGravityInverted = !isGravityInverted;
         Physics.gravity *= -1;
-        //GameObject player = GameObject.FindWithTag("Player");
-        //player.transform.Rotate(180f, 0f, 0f);
     }
 
     //
@@ -139,5 +142,8 @@ public class GameManager : MonoBehaviour {
 
         // load next level
         SceneManager.LoadScene(levelToLoad);
+
+        // enable continue button
+        PlayerPrefs.SetInt("Continue", 0);
     }
 }

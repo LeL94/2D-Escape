@@ -1246,6 +1246,7 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   pauseScreen: {fileID: 7027276464703756564}
   optionsScreen: {fileID: 2587498450788067127}
+  levelSelectButton: {fileID: 5657363375603057807}
   musicVolumeSlider: {fileID: 3043996986837416685}
   sfxVolumeSlider: {fileID: 6448190170559655830}
   fadeSpeed: 2

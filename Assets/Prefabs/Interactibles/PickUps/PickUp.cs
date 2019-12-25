@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp : Collectable {
+public class Pickup : Collectable {
+
+    private enum PickupType {PickupJump, PickupFollow, PickupGravity, Pickup3d};
+    [SerializeField] private PickupType pickupType;
         
     private void OnTriggerEnter(Collider other) {
         if (!other.CompareTag("Player"))
             return;
 
-        switch (gameObject.tag) {
-            case "PickUpJump":
+        switch (pickupType) {
+            case PickupType.PickupJump:
                 PickUpJump();
                 break;
-            /*case "PickUpFollow":
+            /*case Pickup.PickupFollow:
                 PickUpFollow();
                 break;*/
-            case "PickUpGravity":
+            case PickupType.PickupGravity:
                 PickUpGravity();
                 break;
-            case "PickUp3d":
+            case PickupType.Pickup3d:
                 PickUp3d();
                 break;
         }

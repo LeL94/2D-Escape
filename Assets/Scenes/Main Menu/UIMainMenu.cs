@@ -11,6 +11,8 @@ public class UIMainMenu : MonoBehaviour
     public Button continueButton;
 
     private void Awake() {
+
+        // activate or deactivate continue button
         if (PlayerPrefs.HasKey("Continue")) {
             continueButton.interactable = true;
         }
@@ -27,7 +29,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void Continue() {
         FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX
-        // TODO
+        SceneManager.LoadScene("LevelSelect");
     }
 
     public void Quit () {

@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
 
     // Pause
     public GameObject pauseScreen, optionsScreen;
+    public Button levelSelectButton;
 
     // volume sliders
     public Slider musicVolumeSlider, sfxVolumeSlider;
@@ -30,6 +31,14 @@ public class UIManager : MonoBehaviour
 
     private void Awake() {
         instance = this;
+
+        // if this scene is level select, deactivate level select button
+        if (SceneManager.GetActiveScene().name.Equals("LevelSelect")) {
+            levelSelectButton.interactable = false;
+        }
+        else {
+            levelSelectButton.interactable = true;
+        }
     }
 
     private void Update() {

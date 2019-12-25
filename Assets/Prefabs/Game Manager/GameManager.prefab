@@ -43,9 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac18adb7fe3a64c459b5e63808392786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToUnlock: Level 2
+  levelToUnlock: 
   levelToLoad: LevelSelect
-  timeToEndLevel: 0
+  camRig: {fileID: 0}
+  camPivot: {fileID: 0}
   canJump: 0
   isGravityInverted: 0
   is3d: 0

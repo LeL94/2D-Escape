@@ -6,8 +6,7 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource[] musicArray;
     [SerializeField] private int backingTrackIndex = 0;
-    public AudioSource[] sfxArray;
-    
+    public AudioSource[] sfxArray;    
 
     private void Awake() {
         // Singleton pattern
