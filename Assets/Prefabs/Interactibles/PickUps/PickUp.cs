@@ -5,6 +5,9 @@ using UnityEngine;
 public class PickUp : Collectable {
         
     private void OnTriggerEnter(Collider other) {
+        if (!other.CompareTag("Player"))
+            return;
+
         switch (gameObject.tag) {
             case "PickUpJump":
                 PickUpJump();
@@ -19,7 +22,8 @@ public class PickUp : Collectable {
                 PickUp3d();
                 break;
         }
-        
+
+        FindObjectOfType<AudioManager>().PlaySFX(4); // play pickup SFX
         Destroy(gameObject);
     }
 
@@ -37,6 +41,6 @@ public class PickUp : Collectable {
     }
 
     private void PickUp3d() {
-        GameManager.instance.Enable3d();
+        GameManager.instance.Switch3dView();
     }
 }

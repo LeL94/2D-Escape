@@ -5,6 +5,7 @@ using UnityEngine;
 public class Collectable : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other) {
-        Destroy(transform.parent.gameObject);
+        if (other.CompareTag("Player")) 
+            Destroy(transform.parent.gameObject);
     }
 }

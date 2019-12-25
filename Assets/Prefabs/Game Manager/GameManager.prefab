@@ -46,3 +46,6 @@ MonoBehaviour:
   levelToUnlock: Level 2
   levelToLoad: LevelSelect
   timeToEndLevel: 0
+  canJump: 0
+  isGravityInverted: 0
+  is3d: 0

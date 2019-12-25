@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class Target : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
-            //GameManager.loadRelativeLevel(1);
             GameManager.instance.EndLevel();
         } 
     }

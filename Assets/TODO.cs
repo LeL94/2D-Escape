@@ -17,4 +17,6 @@
  * Attivare a disattivare a piacimento le skills
  * 
  * Implement checkpoints
+ * 
+ * Reset camera rotation when switching back to ortographic view
  */

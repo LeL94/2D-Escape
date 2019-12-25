@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Cameras;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
     [SerializeField] string levelToUnlock;
     [SerializeField] string levelToLoad = "LevelSelect";
-    [SerializeField] float timeToEndLevel = 0f;
+
+    // Camera
+    public GameObject camRig;
+    public GameObject camPivot;
 
     public bool canJump = false;
     //private bool isCameraFollowing = false;
     public bool isGravityInverted = false;
     public bool is3d = false;
-
-    private int currentSceneIndex;
 
 
     private void Awake() {
@@ -23,8 +25,8 @@ public class GameManager : MonoBehaviour {
         EnableCursor(false);
 
         // initialize skills
-        if (PlayerPrefs.GetInt("3d_unlocked") == 1)
-            Enable3d();
+        //if (PlayerPrefs.GetInt("3d_unlocked") == 1)
+        //    Enable3d();
     }
 
     private void Update() {
@@ -48,14 +50,19 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void LoadRelativeLevel(int level) {
+    public void Respawn() {
+        
+        FindObjectOfType<AudioManager>().PlaySFX(1); // play death SFX
+        PlayerController.instance.gameObject.SetActive(false); // player inactive
+        StartCoroutine(RespawnCo());
+    }
+
+    private IEnumerator RespawnCo() {
+        
+        yield return new WaitForSeconds(Config.timeToRespawn);
+
         ResetParameters();
-        // level = -1 : previous level
-        // level = 0: current level
-        // level = 1: next level
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        currentSceneIndex = currentSceneIndex + level;
-        SceneManager.LoadScene(currentSceneIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     // pick ups
@@ -63,9 +70,24 @@ public class GameManager : MonoBehaviour {
         canJump = setCanJump;
     }
 
-    public void Enable3d() {
-        is3d = true;
-        Camera.main.orthographic = false;
+    public void Switch3dView() {
+        if (!is3d) {
+            is3d = true;
+            Camera.main.orthographic = false;
+            // reset camera rotation
+            //camRig.GetComponent<FreeLookCam>().enabled = false;
+            //camRig.transform.rotation = Quaternion.Euler(Vector3.zero);
+            //camPivot.transform.rotation = Quaternion.Euler(Vector3.zero);
+            //camRig.GetComponent<FreeLookCam>().enabled = true;
+        }
+        else {
+            is3d = false;
+            Camera.main.orthographic = true;
+            // reset camera rotation
+            camRig.transform.rotation = Quaternion.Euler(Vector3.zero);
+            camPivot.transform.rotation = Quaternion.Euler(Vector3.zero);
+        }
+        
     }
 
     public void InvertGravity() {
@@ -78,6 +100,7 @@ public class GameManager : MonoBehaviour {
     //
     public void PauseUnpause() {
         if (UIManager.instance.pauseScreen.activeInHierarchy) {
+            FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX (no need for the other case because already called by CloseOptions())
             UIManager.instance.pauseScreen.SetActive(false); // close pause menu
             Time.timeScale = 1; // normal time
             EnableCursor(false); // hide and lock cursor
@@ -102,11 +125,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void EndLevel() {
+        FindObjectOfType<AudioManager>().PlaySFX(2); // play win SFX
+        PlayerController.instance.gameObject.SetActive(false); // player inactive
         StartCoroutine(EndLevelCo());
     }
 
     private IEnumerator EndLevelCo() {
-        yield return new WaitForSeconds(timeToEndLevel);
+        yield return new WaitForSeconds(Config.timeToEndLevel);
         ResetParameters();
 
         // unlock level

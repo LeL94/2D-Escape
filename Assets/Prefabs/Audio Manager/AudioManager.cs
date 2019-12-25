@@ -5,9 +5,9 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioSource[] musicArray;
-    public AudioSource[] sfxArray;
-
     [SerializeField] private int backingTrackIndex = 0;
+    public AudioSource[] sfxArray;
+    
 
     private void Awake() {
         // Singleton pattern

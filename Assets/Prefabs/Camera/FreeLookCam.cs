@@ -110,5 +110,8 @@ namespace UnityStandardAssets.Cameras
 				transform.localRotation = m_TransformTargetRot;
 			}
         }
+        
     }
+
+
 }

@@ -33,6 +33,12 @@ public class PlayerController : MonoBehaviour {
         distToGround = myCollider.bounds.extents.y;
     }
 
+    private void Update() {
+        // enable 3d
+        if (PlayerPrefs.GetInt("3d_unlocked") == 1 && Input.GetKeyDown(Config.Key3d))
+            GameManager.instance.Switch3dView();
+    }
+
     private void FixedUpdate() {
         PlayerMovement();
 
@@ -86,6 +92,7 @@ public class PlayerController : MonoBehaviour {
                 jumpPressedRemember = 0f;
                 groundedRembember = 0f;
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+                FindObjectOfType<AudioManager>().PlaySFX(3); // play jump SFX
             }
         }
         // gravity inverted
@@ -96,6 +103,7 @@ public class PlayerController : MonoBehaviour {
             if (groundedRembember > 0 && jumpPressedRemember > 0) {
                 jumpPressedRemember = 0f;
                 rb.velocity = new Vector3(rb.velocity.x, -jumpForce, rb.velocity.z);
+                FindObjectOfType<AudioManager>().PlaySFX(3); // play jump SFX
             }
         }
     }

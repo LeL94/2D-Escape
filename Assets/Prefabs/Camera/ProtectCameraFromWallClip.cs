@@ -23,7 +23,6 @@ namespace UnityStandardAssets.Cameras
         private RaycastHit[] m_Hits;              // the hits between the camera and the target
         private RayHitComparer m_RayHitComparer;  // variable to compare raycast hit distances
 
-
         private void Start()
         {
             // find the camera in the object hierarchy

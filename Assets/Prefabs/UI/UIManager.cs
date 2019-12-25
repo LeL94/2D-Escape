@@ -89,23 +89,28 @@ public class UIManager : MonoBehaviour
 
     // Pause Screen
     public void ResumeGame() {
+        FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX
         GameManager.instance.PauseUnpause();
     }
 
     public void OpenOptions() {
+        FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX
         optionsScreen.SetActive(true);
     }
 
     public void CloseOptions() {
+        FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX
         optionsScreen.SetActive(false);
     }
 
     public void SelectLevel() {
+        FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX
         Time.timeScale = 1f; // set normal time
         SceneManager.LoadScene("LevelSelect");
     }
 
     public void MainMenu() {
+        FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX
         Time.timeScale = 1f; // set normal time
         SceneManager.LoadScene("MainMenu");
     }

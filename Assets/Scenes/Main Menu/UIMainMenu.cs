@@ -20,15 +20,18 @@ public class UIMainMenu : MonoBehaviour
     }
 
     public void NewGame() {
+        FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX
         InitializePlayerPrefs();        
         SceneManager.LoadScene(firstLevel);
     }
 
     public void Continue() {
+        FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX
         // TODO
     }
 
     public void Quit () {
+        FindObjectOfType<AudioManager>().PlaySFX(0); // play menu click SFX
         Application.Quit();
     }
 
