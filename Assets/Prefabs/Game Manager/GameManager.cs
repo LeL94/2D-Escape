@@ -10,37 +10,56 @@ public class GameManager : MonoBehaviour {
     [SerializeField] string levelToUnlock;
     [SerializeField] string levelToLoad = "LevelSelect";
 
+    // respawn
+    private Vector3 respawnPos;
+
     // Camera
     private GameObject camRig, camPivot;
 
-
+    // player activated skills
     public bool canJump = false;
     //private bool isCameraFollowing = false;
     public bool isGravityInverted = false;
     public bool is3d = false;
 
+    // pickup array to respawn pickups
+    private Pickup[] pickupsArray;
+
 
     private void Awake() {
         instance = this;
-        EnableCursor(false);
+        if (!SceneManager.GetActiveScene().name.Equals("MainMenu")) { // disable cursor unless it is main menu
+            EnableCursor(false);
+        }
+            
 
         // initialize skills
         //if (PlayerPrefs.GetInt("3d_unlocked") == 1)
         //    Enable3d();
+
+        pickupsArray = FindObjectsOfType<Pickup>();
     }
 
     private void Start() {
+        // reference to camera
         camRig = FindObjectOfType<FreeLookCam>().gameObject;
         camPivot = camRig.transform.GetChild(0).gameObject;
+
+        // initialize respawn position
+        respawnPos = PlayerController.instance.transform.position; // set respawn position
+
+        // play background music
+        AudioManager.instance.PlayMusic(AudioManager.instance.backingTrackIndex);
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !SceneManager.GetActiveScene().name.Equals("MainMenu")) {
             PauseUnpause();
         }
     }
 
     private void ResetParameters() {
+        PlayerController.instance.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         canJump = false;
         //isCameraFollowing = false;
 
@@ -62,12 +81,21 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(RespawnCo());
     }
 
-    private IEnumerator RespawnCo() {
-        
+    private IEnumerator RespawnCo() {        
         yield return new WaitForSeconds(Config.timeToRespawn);
 
         ResetParameters();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        RespawnPickups();
+
+        PlayerController.instance.transform.position = respawnPos; // put player at respawn position
+        camRig.transform.position = respawnPos; // put camera at respawn position
+        PlayerController.instance.gameObject.SetActive(true); // player enabled
+    }
+
+    private void RespawnPickups() {
+        foreach (Pickup pickup in pickupsArray) {
+            pickup.gameObject.SetActive(true);
+        }
     }
 
     // pick ups
@@ -128,7 +156,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void EndLevel() {
-        FindObjectOfType<AudioManager>().PlaySFX(2); // play win SFX
+        FindObjectOfType<AudioManager>().PlayMusic(2); // play win music
         PlayerController.instance.gameObject.SetActive(false); // player inactive
         StartCoroutine(EndLevelCo());
     }

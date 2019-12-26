@@ -26,8 +26,8 @@ public class Pickup : Collectable {
                 break;
         }
 
-        FindObjectOfType<AudioManager>().PlaySFX(4); // play pickup SFX
-        Destroy(gameObject);
+        FindObjectOfType<AudioManager>().PlaySFX(3); // play pickup SFX
+        gameObject.SetActive(false); // don't destroy, so it can be reactivated by game manager with RespawnPickups()
     }
 
     private void PickUpJump() {

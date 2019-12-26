@@ -4,23 +4,15 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance;
+
     public AudioSource[] musicArray;
-    [SerializeField] private int backingTrackIndex = 0;
+    public int backingTrackIndex;
+
     public AudioSource[] sfxArray;    
 
     private void Awake() {
-        // Singleton pattern
-        int numGameController = FindObjectsOfType<AudioManager>().Length;
-        if (numGameController > 1) {
-            Destroy(gameObject);
-        }
-        else {
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
-    private void Start() {
-        PlayMusic(backingTrackIndex);
+        instance = this;
     }
 
     public void PlayMusic(int musicToPlay) {

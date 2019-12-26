@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour {
                 jumpPressedRemember = 0f;
                 groundedRembember = 0f;
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-                FindObjectOfType<AudioManager>().PlaySFX(3); // play jump SFX
+                FindObjectOfType<AudioManager>().PlaySFX(2); // play jump SFX
             }
         }
         // gravity inverted
