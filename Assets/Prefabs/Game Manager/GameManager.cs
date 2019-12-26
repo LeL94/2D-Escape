@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void EndLevel() {
-        FindObjectOfType<AudioManager>().PlayMusic(2); // play win music
+        FindObjectOfType<AudioManager>().PlayMusic(3); // play win music
         PlayerController.instance.gameObject.SetActive(false); // player inactive
         StartCoroutine(EndLevelCo());
     }
@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(Config.timeToEndLevel);
         ResetParameters();
 
-        // unlock level
+        // unlock this level
         PlayerPrefs.SetInt(levelToUnlock, 1);
 
         // load next level

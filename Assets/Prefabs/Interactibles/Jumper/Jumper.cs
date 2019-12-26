@@ -5,10 +5,13 @@ using UnityEngine;
 public class Jumper : MonoBehaviour {
 
     [SerializeField] private float jumpForce = 15;
+    [SerializeField] private int sfxIndex = 5;
 
     private void OnTriggerEnter(Collider other) {
-        Rigidbody rb = other.GetComponent<Rigidbody>();
-        //rb.AddForce(0f, jumpForce, 0f);
-        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        if (other.CompareTag("Player")) {
+            AudioManager.instance.PlaySFX(sfxIndex);
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        }        
     }
 }

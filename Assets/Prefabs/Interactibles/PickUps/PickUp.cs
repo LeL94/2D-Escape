@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickup : Collectable {
+public class Pickup : MonoBehaviour {
 
     private enum PickupType {PickupJump, PickupFollow, PickupGravity, Pickup3d};
     [SerializeField] private PickupType pickupType;

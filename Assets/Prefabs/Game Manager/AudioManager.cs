@@ -6,9 +6,11 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
+    [Header("Audio")]
     public AudioSource[] musicArray;
     public int backingTrackIndex;
 
+    [Header("SFX")]
     public AudioSource[] sfxArray;    
 
     private void Awake() {

@@ -8,18 +8,22 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
+    [Header("Black Screen")]
     public Image blackScreen;
     public bool fadeToBlack, fadeFromBlack;
 
     // Health
+    [Header("Health")]
     public Text healthText;
     public Image healthImage;
     public Sprite[] healthSprites;
 
     // Score
+    [Header("Score")]
     public Text scoreText;
 
     // Pause
+    [Header("Pause Screen")]
     public GameObject pauseScreen, optionsScreen;
     public Button levelSelectButton;
 
