@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         // enable 3d
-        if (PlayerPrefs.GetInt("3d_unlocked") == 1 && Input.GetKeyDown(Config.Key3d))
+        if (PlayerPrefs.GetInt("3d_unlocked") == 1 && Input.GetButtonDown("Fire1"))
             GameManager.instance.Switch3dView();
 
         // reset jump for double jump

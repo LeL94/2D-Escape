@@ -69,8 +69,7 @@ public class GameManager : MonoBehaviour {
         }
 
         if (is3d) {
-            is3d = false;
-            Camera.main.orthographic = true;
+            Disable3d();
         }
     }
 
@@ -114,13 +113,17 @@ public class GameManager : MonoBehaviour {
             //camRig.GetComponent<FreeLookCam>().enabled = true;
         }
         else {
-            is3d = false;
-            Camera.main.orthographic = true;
-            // reset camera rotation
-            camRig.transform.rotation = Quaternion.Euler(Vector3.zero);
-            camPivot.transform.rotation = Quaternion.Euler(Vector3.zero);
+            Disable3d();
         }
         
+    }
+
+    private void Disable3d() {
+        is3d = false;
+        Camera.main.orthographic = true;
+        // reset camera rotation
+        camRig.transform.rotation = Quaternion.Euler(Vector3.zero);
+        camPivot.transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
     public void InvertGravity() {
