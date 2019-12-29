@@ -78,6 +78,9 @@ public class GameManager : MonoBehaviour {
         
         FindObjectOfType<AudioManager>().PlaySFX(1); // play death SFX
         PlayerController.instance.gameObject.SetActive(false); // player inactive
+        Instantiate(PlayerController.instance.deathEffect,
+            PlayerController.instance.transform.position,
+            PlayerController.instance.transform.rotation); // death effect
         StartCoroutine(RespawnCo());
     }
 

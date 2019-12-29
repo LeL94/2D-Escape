@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float jumpForce = 17f;
-    [SerializeField] private float gravityForce = 3f;    
+    [SerializeField] private float gravityForce = 3f;
+
+    [Header("Effects")]
+    public GameObject deathEffect;
 
     private Rigidbody rb;
     private SphereCollider myCollider;

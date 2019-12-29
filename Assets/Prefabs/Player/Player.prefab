@@ -105,9 +105,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93dbdb592f530654793f791180dbbad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSfxIndex: 2
   moveSpeed: 10
   jumpForce: 17
   gravityForce: 5
+  deathEffect: {fileID: 6242144055321518796, guid: 6e985ff2d26bb4e4a8c393340727fb4a,
+    type: 3}
 --- !u!54 &838138405
 Rigidbody:
   m_ObjectHideFlags: 0

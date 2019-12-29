@@ -19,4 +19,8 @@
  * Implement checkpoints
  * 
  * Reset camera rotation when switching back to ortographic view
+ * 
+ * 2D view from top
+ * 
+ * Space man model
  */

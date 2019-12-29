@@ -9,6 +9,8 @@ public class DisappearingBlock : MonoBehaviour
     [SerializeField] private float FLASHING_TIME = 0.3f;
     [SerializeField] private float INACTIVE_TIME = 2f;
 
+    private GameObject blocks;
+
     private int currentRepetition;
 
     private float activeTimer;
@@ -20,6 +22,8 @@ public class DisappearingBlock : MonoBehaviour
 
 
     private void Start() {
+        blocks = gameObject.transform.GetChild(0).gameObject; // reference to blocks
+
         currentRepetition = 0;
 
         activeTimer = ACTIVE_TIME;
@@ -45,8 +49,8 @@ public class DisappearingBlock : MonoBehaviour
 
 
     private void StayActive() {
-        GetComponent<MeshRenderer>().enabled = true;
         GetComponent<Collider>().enabled = true;
+        blocks.SetActive(true);
 
         activeTimer -= Time.deltaTime;
 
@@ -62,7 +66,7 @@ public class DisappearingBlock : MonoBehaviour
 
         if (flashingTimer <= 0) {
             flashingTimer = FLASHING_TIME;
-            GetComponent<MeshRenderer>().enabled = !GetComponent<MeshRenderer>().enabled; // flash mesh renderer
+            blocks.SetActive(!blocks.activeSelf); // flash blocks
 
             currentRepetition++;
 
@@ -75,8 +79,8 @@ public class DisappearingBlock : MonoBehaviour
     }
 
     private void StayInactive() {
-        GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
+        blocks.SetActive(false);
 
         inactiveTimer -= Time.deltaTime;
 
