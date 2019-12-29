@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape) && !SceneManager.GetActiveScene().name.Equals("MainMenu")) {
+        // if P is pressed and it is not main menu, pause game
+        if (Input.GetKeyDown(KeyCode.P) && !SceneManager.GetActiveScene().name.Equals("MainMenu")) {
             PauseUnpause();
         }
     }
@@ -108,9 +109,11 @@ public class GameManager : MonoBehaviour {
             Camera.main.orthographic = false;
             // reset camera rotation
             //camRig.GetComponent<FreeLookCam>().enabled = false;
+            //camRig.GetComponent<ProtectCameraFromWallClip>().enabled = false;
             //camRig.transform.rotation = Quaternion.Euler(Vector3.zero);
             //camPivot.transform.rotation = Quaternion.Euler(Vector3.zero);
             //camRig.GetComponent<FreeLookCam>().enabled = true;
+            //camRig.GetComponent<ProtectCameraFromWallClip>().enabled = true;
         }
         else {
             Disable3d();

@@ -11,7 +11,11 @@ public class Jumper : MonoBehaviour {
         if (other.CompareTag("Player")) {
             AudioManager.instance.PlaySFX(sfxIndex);
             Rigidbody rb = other.GetComponent<Rigidbody>();
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+
+            if (GameManager.instance.isGravityInverted)
+                rb.velocity = new Vector3(rb.velocity.x, -jumpForce, rb.velocity.z);
+            else
+                rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         }        
     }
 }
