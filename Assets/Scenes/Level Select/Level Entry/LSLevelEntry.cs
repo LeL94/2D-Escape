@@ -66,6 +66,8 @@ public class LSLevelEntry : MonoBehaviour
                 LSUIManager.instance.levelInfoPanel.SetActive(true);
                 LSUIManager.instance.levelLockedPanel.SetActive(false);
                 LSUIManager.instance.levelSelectedText.text = levelName;
+                LSUIManager.instance.gemsTakenText.text = GameManager.instance.GetNumberOfTakenGems(levelName).ToString();
+
             } else { // else display locked text
                 LSUIManager.instance.levelInfoPanel.SetActive(false);
                 LSUIManager.instance.levelLockedPanel.SetActive(true);

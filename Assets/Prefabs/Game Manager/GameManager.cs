@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour {
     public bool isGravityInverted = false;
     public bool is3d = false;
 
-    // pickup array to respawn pickups
+    // pickups array to respawn pickups
     private Pickup[] pickupsArray;
 
 
@@ -31,13 +32,8 @@ public class GameManager : MonoBehaviour {
         if (!SceneManager.GetActiveScene().name.Equals("MainMenu")) { // disable cursor unless it is main menu
             EnableCursor(false);
         }
-            
 
-        // initialize skills
-        //if (PlayerPrefs.GetInt("3d_unlocked") == 1)
-        //    Enable3d();
-
-        pickupsArray = FindObjectsOfType<Pickup>();
+        pickupsArray = FindObjectsOfType<Pickup>();        
     }
 
     private void Start() {
@@ -50,6 +46,8 @@ public class GameManager : MonoBehaviour {
 
         // play background music
         AudioManager.instance.PlayMusic(AudioManager.instance.backingTrackIndex);
+
+        DestroyGemsAlreadyTaken(); // destroy all gems that have alrady been taken
     }
 
     private void Update() {
@@ -182,5 +180,36 @@ public class GameManager : MonoBehaviour {
 
         // enable continue button
         PlayerPrefs.SetInt("Continue", 0);
+    }
+
+    private void DestroyGemsAlreadyTaken() {
+        Gem[] gemsArray = FindObjectsOfType<Gem>();
+
+        foreach (Gem gem in gemsArray) {
+            string gemToSpawn = SceneManager.GetActiveScene().name + "_" + gem.thisGemIndex;
+            if (PlayerPrefs.HasKey(gemToSpawn)) {
+                Destroy(gem.gameObject);
+            }                
+        }
+    }
+
+    public void SaveGem(Gem.GemIndex gemIndex) {
+        string gemToSave = SceneManager.GetActiveScene().name + "_" + gemIndex; // "Level X_GemX"
+        PlayerPrefs.SetInt(gemToSave, 1);
+    }
+
+    public int GetNumberOfTakenGems(string levelName) {
+        int numberOfGemsTaken = 0;
+
+        Array gemIndexes = System.Enum.GetValues(typeof(Gem.GemIndex));
+
+        foreach (Gem.GemIndex gemIndex in gemIndexes) {
+            //Debug.Log("checking " + (SceneManager.GetActiveScene().name + "_" + gemIndex));
+            if (PlayerPrefs.HasKey(levelName + "_" + gemIndex)) {
+                numberOfGemsTaken++;
+            }
+        }           
+
+        return numberOfGemsTaken;
     }
 }

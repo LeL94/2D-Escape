@@ -8,7 +8,7 @@ public class LSUIManager : MonoBehaviour
     public static LSUIManager instance;
 
     public GameObject levelInfoPanel, levelLockedPanel;
-    public Text levelSelectedText, levelLockedText;
+    public Text levelSelectedText, levelLockedText, gemsTakenText;
 
     private void Awake() {
         instance = this;
