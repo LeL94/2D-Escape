@@ -1,5 +1,15 @@
-﻿/* TODO
+﻿/* BUG
  * 
+ * Quando si cambia manualmente visuale da 2d a 3d, ripartire da 2d ortogonale
+ * 
+ * Lore
+ * 
+ * /
+
+
+/* TODO
+ * 
+ * Animation idle, jump, spawn
  * 
  * Pick up composto da più power ups, si capisce dall'animazione (es saltella, quindi jump,
  * ruota quindi 3d...
@@ -8,7 +18,8 @@
  * 
  * Pick up to rotate camera
  * 
- * Animation jump, spawn, die
+ * Pick up double jump
+ * 
  * 
  * Nuove abilità si sbloccano (tipo ruotare camera) e si può tornare nei livelli precedenti per scoprire nuove aree
  * 
@@ -24,3 +35,19 @@
  * 
  * Space man model
  */
+
+
+
+ /* TO DECIDE
+  * 
+  * POV
+  * 
+  * 3rd person view (space suit man with ball head)
+  * 
+  * Pick up respawn
+  * 
+  * Pacman effect
+  * 
+  * 
+  * 
+  */

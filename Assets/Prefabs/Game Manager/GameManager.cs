@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
         // play background music
         AudioManager.instance.PlayMusic(AudioManager.instance.backingTrackIndex);
 
-        DestroyGemsAlreadyTaken(); // destroy all gems that have alrady been taken
+        //DestroyGemsAlreadyTaken(); // destroy all gems that have already been taken
     }
 
     private void Update() {
